@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:q_dang/widget/home/widget_smallGroupMember.dart';
+
+import '../../util/constants.dart';
 
 class ScreenHome extends StatefulWidget {
 //여기서 API호출 받고 매핑
   List<String> TestGroupList = ['1', '2', '3', '4'];
+  List<String> TestRecordList = ['패', '패', '승', '승', '승'];
 
   @override
   State<StatefulWidget> createState() => _ScreenHomeState();
@@ -32,21 +36,21 @@ class _ScreenHomeState extends State<ScreenHome> {
               height: height * 0.02,
               child: Text('최근 경기'),
             ),
-            Container(
-              height: height * 0.1,
-              width: width,
-              decoration: BoxDecoration(border: Border.all()),
-              child: SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                    children: widget.TestGroupList.map((e) => Text('모임 $e'))
-                        .toList()),
-              ),
-            ),
+            // Container(
+            //   height: height * 0.1,
+            //   width: width,
+            //   child: SingleChildScrollView(
+            //     scrollDirection: Axis.horizontal,
+            //     child: Row(
+            //         children: widget.TestGroupList.map(
+            //             (e) => WidgetSmallGroupMember(name: e)).toList()),
+            //   ),
+            // ),
             Container(
               color: Colors.grey,
               height: 1.5,
             ),
+            Text('나의 경기전적'),
           ]),
     );
   }
