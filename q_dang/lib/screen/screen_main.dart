@@ -30,14 +30,11 @@ class _MainScreenState extends State<MainScreen> {
           '여기 타이틀',
           style: TextStyle(color: kMainColor),
         ),
-        leading: IconButton(
-          color: Colors.grey,
-          icon: Icon(Icons.menu),
-          onPressed: () {},
-        ),
         actions: [
           IconButton(
-              color: Colors.grey, onPressed: () {}, icon: Icon(Icons.search)),
+              color: Colors.grey,
+              onPressed: () {},
+              icon: Icon(Icons.notifications)),
         ],
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(1.0),
