@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:random_number_generator/Screen/Screen_settings.dart';
+import 'package:random_number_generator/component/numberRow.dart';
 import 'package:random_number_generator/constant/color.dart';
 
 class mainScreen extends StatefulWidget {
@@ -11,6 +12,7 @@ class mainScreen extends StatefulWidget {
 
 class _mainScreenState extends State<mainScreen> {
   List<int> randomNumber = [123, 456, 789];
+  int maxNumber = 1000;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,7 +24,7 @@ class _mainScreenState extends State<mainScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _Header(),
+            _Header(onPressed: saveSetting),
             _Body(randomNumber: randomNumber),
             _Footer(onPressed: onRandomNumberGenerate)
           ],
@@ -31,12 +33,27 @@ class _mainScreenState extends State<mainScreen> {
     );
   }
 
+  void saveSetting() async {//설정갑을 받아오기 위해 async로 선언
+    //push : list에서 add와 비슷
+    final int? result = await Navigator.of(context)//설정화면에서 보내주는 파라미터를 기다려야되느까 await선언
+        .push<int>(MaterialPageRoute(builder: (BuildContext buildContext) {//push<int>로 int값을 받아오는걸 명시할 수 있음
+        return SettingsScreen(maxNumber: maxNumber);
+        }));
+
+    if(result != null){//뒤로가기 버튼이나 아이폰에서 슬라이드로 메인화면으로 돌아오면 result가 null값을 가질 수 있음 -> 예외처리
+      setState((){    
+      maxNumber = result;
+    });
+    }
+    
+  }
+
   void onRandomNumberGenerate() {
     final rand = Random();
 
     final Set<int> newNumbers = {};
     while (newNumbers.length != 3) {
-      final number = rand.nextInt(1000);
+      final number = rand.nextInt(maxNumber);
       newNumbers.add(number);
     }
     setState(() {
@@ -46,6 +63,9 @@ class _mainScreenState extends State<mainScreen> {
 }
 
 class _Header extends StatelessWidget {
+  final VoidCallback onPressed;
+
+  _Header({required this.onPressed});
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -57,13 +77,7 @@ class _Header extends StatelessWidget {
               color: Colors.white, fontSize: 30, fontWeight: FontWeight.w700),
         ),
         IconButton(
-          onPressed: () {
-            //push : list에서 add와 비슷
-            Navigator.of(context)
-                .push(MaterialPageRoute(builder: (BuildContext buildContext) {
-              return SettingsScreen();
-            }));
-          },
+          onPressed: onPressed,
           icon: const Icon(
             Icons.settings,
             color: RED_COLOR,
@@ -92,16 +106,7 @@ class _Body extends StatelessWidget {
                     bottom: e.key == 2
                         ? 0
                         : 16), //마지막 Image에는 아래 padding을 넣지 않으려고 사용
-                child: Row(
-                    children: e.value
-                        .toString()
-                        .split('')
-                        .map((x) => Image.asset(
-                              'asset/img/$x.png',
-                              height: 70,
-                              width: 50,
-                            ))
-                        .toList()),
+                child: NumberRow(number: e.value)
               ))
           .toList(),
     ));

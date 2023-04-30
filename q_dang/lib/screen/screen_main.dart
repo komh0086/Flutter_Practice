@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:q_dang/component/appBar.dart';
 
-import '../util/constants.dart';
+import '../constant/constants.dart';
 import 'home/Screen_Home.dart';
 import 'mypage/Screen_MyPage.dart';
 
@@ -25,27 +26,7 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          '여기 타이틀',
-          style: TextStyle(color: kMainColor),
-        ),
-        actions: [
-          IconButton(
-              color: Colors.grey,
-              onPressed: () {},
-              icon: Icon(Icons.notifications)),
-        ],
-        bottom: PreferredSize(
-          preferredSize: const Size.fromHeight(1.0),
-          child: Container(
-            color: Colors.grey,
-            height: 1.5,
-          ),
-        ),
-        elevation: 0,
-        backgroundColor: kSubColor,
-      ),
+      appBar: _selectedIndex == 0 ? homeAppBar() : null,
       body: Container(
         child: _widgetOptions.elementAt(_selectedIndex),
       ),

@@ -1,18 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:q_dang/widget/home/widget_smallGroupMember.dart';
-
-import '../../util/constants.dart';
+import 'package:q_dang/component/record/widget_record.dart';
 
 class ScreenHome extends StatefulWidget {
 //여기서 API호출 받고 매핑
-  List<String> TestGroupList = ['1', '2', '3', '4'];
-  List<String> TestRecordList = ['패', '패', '승', '승', '승'];
 
   @override
   State<StatefulWidget> createState() => _ScreenHomeState();
 }
 
 class _ScreenHomeState extends State<ScreenHome> {
+  List<String> TestRecordList = ['패', '패', '승', '승', '승'];
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -21,7 +19,9 @@ class _ScreenHomeState extends State<ScreenHome> {
 
     return SingleChildScrollView(
       scrollDirection: Axis.vertical,
-      child: Column(
+      child: Padding(
+        padding: EdgeInsets.all(10),
+        child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -36,22 +36,18 @@ class _ScreenHomeState extends State<ScreenHome> {
               height: height * 0.02,
               child: Text('최근 경기'),
             ),
-            // Container(
-            //   height: height * 0.1,
-            //   width: width,
-            //   child: SingleChildScrollView(
-            //     scrollDirection: Axis.horizontal,
-            //     child: Row(
-            //         children: widget.TestGroupList.map(
-            //             (e) => WidgetSmallGroupMember(name: e)).toList()),
-            //   ),
-            // ),
             Container(
               color: Colors.grey,
               height: 1.5,
             ),
             Text('나의 경기전적'),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: TestRecordList
+              .map((e) => WidgetRecord(record: e)).toList(),
+            )
           ]),
+      ),
     );
   }
 }
