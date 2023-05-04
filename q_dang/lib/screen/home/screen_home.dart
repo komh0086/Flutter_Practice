@@ -18,6 +18,10 @@ class _ScreenHomeState extends State<ScreenHome> {
     new Record(result: '패'),
     new Record(result: '패'),
     new Record(result: '승'),
+    new Record(result: '패'),
+    new Record(result: '승'),
+    new Record(result: '패'),
+    new Record(result: '승'),
   ];
 
   @override
