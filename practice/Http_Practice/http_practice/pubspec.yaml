@@ -31,15 +31,19 @@ dependencies:
   flutter:
     sdk: flutter
 
-  http: ^0.13.4
+  http: ^0.13.4 # http 처리 함수 제공 패키지
+  json_annotation: ^4.4.0 # Json 모델링 처리 패키지
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
 
 dev_dependencies:
+  test: ^ 1.16.4 # Dart unit test 제공 패키지
   flutter_test:
     sdk: flutter
+  build_runner: ^2.0.5 # Json 모델링 처리 패키지
+  json_serializable: ^6.1.5 # Json 모델링 처리 패키지
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
