@@ -3,14 +3,16 @@ import 'package:flutter/material.dart';
 import 'card_title.dart';
 import 'main_card.dart';
 
-class hourlyCard extends StatelessWidget {
+class HourlyCard extends StatelessWidget {
+  const HourlyCard({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MainCard(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          CardTitle(title: '시간별 미세먼지'),
+          const CardTitle(title: '시간별 미세먼지'),
           Column(
             children: List.generate(24, (index) {
               int hour = DateTime.now().hour;
@@ -23,7 +25,7 @@ class hourlyCard extends StatelessWidget {
                   children: [
                     Text(hour < 10 ? '0$hour시' : '$hour시'),
                     Image.asset('asset/img/good.png', width: 20),
-                    Text('좋음'),
+                    const Text('좋음'),
                   ],
                 ),
               );

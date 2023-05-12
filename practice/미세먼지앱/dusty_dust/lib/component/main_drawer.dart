@@ -9,7 +9,7 @@ class MainDrawer extends StatelessWidget {
   final OnRegionTap onRegionTap;
   final String selectedRegion;
 
-  MainDrawer({required this.onRegionTap, required this.selectedRegion});
+  const MainDrawer({super.key, required this.onRegionTap, required this.selectedRegion});
 
   @override
   Widget build(BuildContext context) {

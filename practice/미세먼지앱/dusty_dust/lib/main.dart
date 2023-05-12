@@ -9,7 +9,7 @@ void main() {
         fontFamily: 'sunflower',
       ),
       title: 'Dusty_Dust',
-      home: HomeScreen(),
+      home: const HomeScreen(),
     )
   );
 }

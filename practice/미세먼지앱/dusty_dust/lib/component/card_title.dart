@@ -5,7 +5,7 @@ import '../contant/colors.dart';
 class CardTitle extends StatelessWidget {
   final String title;
 
-  CardTitle({required this.title});
+  const CardTitle({super.key, required this.title});
 
   @override
   Widget build(BuildContext context) {

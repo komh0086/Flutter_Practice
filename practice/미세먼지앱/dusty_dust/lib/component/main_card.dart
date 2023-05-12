@@ -5,7 +5,7 @@ import '../contant/colors.dart';
 class MainCard extends StatelessWidget {
   final Widget child;
 
-  MainCard({required this.child});
+  const MainCard({super.key, required this.child});
   @override
   Widget build(BuildContext context) {
     return Card(

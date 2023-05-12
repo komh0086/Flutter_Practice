@@ -9,7 +9,7 @@ class MainAppBar extends StatelessWidget {
   final StatusModel status; //stat에 맞는 Status
   final StatModel stat; //공개 API로 받아온 실제 상태
 
-  MainAppBar({required this.stat, required this.status, required this.region});
+  const MainAppBar({super.key, required this.stat, required this.status, required this.region});
 
   final ts = const TextStyle(
     //자주 쓰는 스타일 정의
@@ -25,7 +25,7 @@ class MainAppBar extends StatelessWidget {
       flexibleSpace: FlexibleSpaceBar(
         background: SafeArea(
           child: Container(
-            margin: EdgeInsets.only(top: kToolbarHeight), //앱바의 높이만큼 margin 생성
+            margin: const EdgeInsets.only(top: kToolbarHeight), //앱바의 높이만큼 margin 생성
             child: Column(
               children: [
                 Text(region,
