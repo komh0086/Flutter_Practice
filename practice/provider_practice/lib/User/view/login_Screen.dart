@@ -1,3 +1,7 @@
+import 'dart:convert';
+import 'dart:io';
+
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:provider_practice/Common/const/colors.dart';
 import 'package:provider_practice/Common/layout/default_layout.dart';
@@ -9,6 +13,8 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var ID = "";
+    var PW = "";
     return DefaultLayout(
         child: SingleChildScrollView(
       keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
@@ -34,7 +40,9 @@ class LoginScreen extends StatelessWidget {
               ),
               CustomTextFormField(
                 hintText: '이메일을 입력해주세요.',
-                onChanged: (String value) {},
+                onChanged: (String value) {
+                  ID = value;
+                },
               ),
               const SizedBox(
                 height: 16,
@@ -42,13 +50,15 @@ class LoginScreen extends StatelessWidget {
               CustomTextFormField(
                   hintText: '비밀번호를 입력해주세요.',
                   obscureText: true,
-                  onChanged: (String vlaue) {}),
+                  onChanged: (String value) {
+                    PW = value;
+                  }),
               const SizedBox(
                 height: 16,
               ),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(backgroundColor: PRIMARY_COLOR),
-                onPressed: () {},
+                onPressed: onLoginPressed,
                 child: const Text('로그인'),
               ),
               TextButton(
@@ -61,6 +71,20 @@ class LoginScreen extends StatelessWidget {
         ),
       ),
     ));
+  }
+
+  void onLoginPressed() async {
+    final dio = Dio();
+
+    const IP = '127.0.0.1:3000';
+    const rawString = 'test@codefactory.ai:testtest';
+    Codec<String, String> stirngToBase64 = utf8.fuse(base64);
+    String token = stirngToBase64.encode(rawString);
+    print('$IP');
+    var response = await dio.post('http://$IP/auth/login',
+        options: Options(headers: {'authorization': 'Basic $token'}));
+    print(response.statusCode);
+    print(response.data);
   }
 }
 
