@@ -1,20 +1,28 @@
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:provider_practice/Common/const/colors.dart';
+import 'package:provider_practice/Common/const/data.dart';
 import 'package:provider_practice/Common/layout/default_layout.dart';
 
 import '../../Common/component/custom_text_form_field.dart';
+import '../../Common/view/root_tab.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
   @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  final IP = '127.0.0.1:3000';
+  String username = '';
+  String password = '';
+
+  @override
   Widget build(BuildContext context) {
-    var ID = "";
-    var PW = "";
     return DefaultLayout(
         child: SingleChildScrollView(
       keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
@@ -41,7 +49,7 @@ class LoginScreen extends StatelessWidget {
               CustomTextFormField(
                 hintText: '이메일을 입력해주세요.',
                 onChanged: (String value) {
-                  ID = value;
+                  username = value;
                 },
               ),
               const SizedBox(
@@ -51,7 +59,7 @@ class LoginScreen extends StatelessWidget {
                   hintText: '비밀번호를 입력해주세요.',
                   obscureText: true,
                   onChanged: (String value) {
-                    PW = value;
+                    password = value;
                   }),
               const SizedBox(
                 height: 16,
@@ -63,7 +71,7 @@ class LoginScreen extends StatelessWidget {
               ),
               TextButton(
                 style: TextButton.styleFrom(foregroundColor: Colors.black),
-                onPressed: () {},
+                onPressed: onRegistPressed,
                 child: const Text('회원가입'),
               )
             ],
@@ -73,17 +81,33 @@ class LoginScreen extends StatelessWidget {
     ));
   }
 
+  void onRegistPressed() async{
+    final dio = Dio();
+    Future<String?> token = storage.read(key: ACCESS_TOKEN_KEY);
+    var response = await dio.post('http://$IP/auth/token',
+        options: Options(headers: {'authorization': 'Bearer $token'}));
+    print(response.data);
+  }
+
   void onLoginPressed() async {
     final dio = Dio();
 
-    const IP = '127.0.0.1:3000';
-    const rawString = 'test@codefactory.ai:testtest';
-    Codec<String, String> stirngToBase64 = utf8.fuse(base64);
+    String rawString = username + ':' + password;
+    Codec<String, String> stirngToBase64 = utf8.fuse(base64);//base64로 Encodeing
     String token = stirngToBase64.encode(rawString);
-    print('$IP');
+
     var response = await dio.post('http://$IP/auth/login',
         options: Options(headers: {'authorization': 'Basic $token'}));
-    print(response.statusCode);
+
+    final refreshToken = response.data['refreshToken'];
+    final accessToken = response.data['accessToken'];
+
+    await storage.write(key: REFRESH_TOKEN_KEY, value: refreshToken);
+    await storage.write(key: ACCESS_TOKEN_KEY, value: accessToken);
+
+    Navigator.of(context).push(
+      MaterialPageRoute(builder: (_) => RootTab())
+    );
     print(response.data);
   }
 }
