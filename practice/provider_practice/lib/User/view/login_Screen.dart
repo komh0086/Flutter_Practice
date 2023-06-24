@@ -17,7 +17,6 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  final IP = '127.0.0.1:3000';
   String username = '';
   String password = '';
 
@@ -81,19 +80,14 @@ class _LoginScreenState extends State<LoginScreen> {
     ));
   }
 
-  void onRegistPressed() async{
-    final dio = Dio();
-    Future<String?> token = storage.read(key: ACCESS_TOKEN_KEY);
-    var response = await dio.post('http://$IP/auth/token',
-        options: Options(headers: {'authorization': 'Bearer $token'}));
-    print(response.data);
-  }
+  void onRegistPressed() async {}
 
   void onLoginPressed() async {
     final dio = Dio();
 
     String rawString = username + ':' + password;
-    Codec<String, String> stirngToBase64 = utf8.fuse(base64);//base64로 Encodeing
+    Codec<String, String> stirngToBase64 =
+        utf8.fuse(base64); //base64로 Encodeing
     String token = stirngToBase64.encode(rawString);
 
     var response = await dio.post('http://$IP/auth/login',
@@ -105,10 +99,7 @@ class _LoginScreenState extends State<LoginScreen> {
     await storage.write(key: REFRESH_TOKEN_KEY, value: refreshToken);
     await storage.write(key: ACCESS_TOKEN_KEY, value: accessToken);
 
-    Navigator.of(context).push(
-      MaterialPageRoute(builder: (_) => RootTab())
-    );
-    print(response.data);
+    Navigator.of(context).push(MaterialPageRoute(builder: (_) => RootTab()));
   }
 }
 
