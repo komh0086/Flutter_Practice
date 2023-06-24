@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:provider_practice/Common/const/data.dart';
 import 'package:provider_practice/Restaurant/component/restaurant_Card.dart';
+import 'package:provider_practice/Restaurant/model/restaurant_model.dart';
 
 class RestaurantScreen extends StatelessWidget {
   Future<List> pagenateRestaurant() async {
@@ -32,16 +33,8 @@ class RestaurantScreen extends StatelessWidget {
                 itemCount: snapshot.data!.length,
                 itemBuilder: (_, index) {
                   final item = snapshot.data![index];
-                  return RestaurantCard(
-                    image: Image.network('http://$IP${item['thumbUrl']}',
-                        fit: BoxFit.cover),
-                    name: item['name'],
-                    tags: List<String>.from(item['tags']),
-                    ratingsCount: item['ratingsCount'],
-                    deliveryTime: item['deliveryTime'],
-                    deliveryFee: item['deliveryFee'],
-                    ratings: item['ratings'],
-                  );
+                  RestaurantModel restaurantModel = RestaurantModel.fromJson(json: item);
+                  return RestaurantCard.fromModel(model: restaurantModel);
                 },
                 separatorBuilder: (_, index) {
                   return SizedBox(
