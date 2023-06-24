@@ -16,6 +16,6 @@ abstract class RestaurantRepository{
 
   @GET('/{id}')
   Future<RestaurantDetailModel> getRestaurantDetail({
-    @Path('id') required String id
-    });
+    @Path() required String id,
+  });
 }

@@ -42,13 +42,13 @@ class _RestaurantRepository implements RestaurantRepository {
   }
 
   @override
-  Future<InvalidType> getRestaurantDetail({required id}) async {
+  Future<RestaurantDetailModel> getRestaurantDetail({required id}) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<InvalidType>(Options(
+        .fetch<Map<String, dynamic>>(_setStreamType<RestaurantDetailModel>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -60,7 +60,7 @@ class _RestaurantRepository implements RestaurantRepository {
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = InvalidType.fromJson(_result.data!);
+    final value = RestaurantDetailModel.fromJson(_result.data!);
     return value;
   }
 

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../../Common/const/data.dart';
 import '../../Common/layout/default_layout.dart';
+import '../../product/component/product_Card.dart';
 import '../component/restaurant_Card.dart';
 import '../model/restaurant_detail_model.dart';
 import '../repository/restaurant_repository.dart';
@@ -49,10 +50,10 @@ class RestaurantDetailScreen extends StatelessWidget{
       sliver: SliverList(
         delegate: SliverChildBuilderDelegate(
           (context, index){
-            final model = list[index];
+            final RestaurantProductModel product = list[index];
             return Padding(
               padding: const EdgeInsets.only(top: 16.0),
-              child: ProductCard.fromModel(model: model,),
+              child: ProductCard.fromModel(model: product),
             );
           },
           childCount: list.length,

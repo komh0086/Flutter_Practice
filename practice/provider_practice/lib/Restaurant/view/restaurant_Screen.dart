@@ -1,9 +1,10 @@
+import 'package:actual/Restaurant/view/restaurant_detail_Screen.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:provider_practice/Common/const/data.dart';
-import 'package:provider_practice/Restaurant/component/restaurant_Card.dart';
-import 'package:provider_practice/Restaurant/model/restaurant_model.dart';
-import 'package:provider_practice/Restaurant/view/restaurant_detail_Screen.dart';
+
+import '../../Common/const/data.dart';
+import '../component/restaurant_Card.dart';
+import '../model/restaurant_model.dart';
 
 class RestaurantScreen extends StatelessWidget {
   Future<List> pagenateRestaurant() async {
