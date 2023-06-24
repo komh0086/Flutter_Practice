@@ -2,11 +2,11 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:provider_practice/Common/const/colors.dart';
-import 'package:provider_practice/Common/const/data.dart';
-import 'package:provider_practice/Common/layout/default_layout.dart';
 
 import '../../Common/component/custom_text_form_field.dart';
+import '../../Common/const/colors.dart';
+import '../../Common/const/data.dart';
+import '../../Common/layout/default_layout.dart';
 import '../../Common/view/root_tab.dart';
 
 class LoginScreen extends StatefulWidget {

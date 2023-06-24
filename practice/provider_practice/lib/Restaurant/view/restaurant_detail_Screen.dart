@@ -1,12 +1,11 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:provider_practice/Common/const/data.dart';
-import 'package:provider_practice/Common/layout/default_layout.dart';
-import 'package:provider_practice/Restaurant/repository/restaurant_repository.dart';
-import 'package:provider_practice/product/component/product_Card.dart';
 
+import '../../Common/const/data.dart';
+import '../../Common/layout/default_layout.dart';
 import '../component/restaurant_Card.dart';
 import '../model/restaurant_detail_model.dart';
+import '../repository/restaurant_repository.dart';
 
 class RestaurantDetailScreen extends StatelessWidget{
   final String id;

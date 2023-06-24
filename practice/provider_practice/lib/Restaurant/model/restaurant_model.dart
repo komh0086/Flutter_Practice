@@ -1,12 +1,15 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:provider_practice/Common/util/DataUtil.dart';
+
+import '../../Common/util/DataUtil.dart';
 
 part 'restaurant_model.g.dart';
+
 enum RestaurantPriceRange{
   expensive,
   medium,
   cheap
 }
+
 @JsonSerializable()
 class RestaurantModel{
   final String id;
