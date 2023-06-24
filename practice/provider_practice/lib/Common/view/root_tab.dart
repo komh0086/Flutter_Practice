@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider_practice/Common/const/colors.dart';
 import 'package:provider_practice/Common/layout/default_layout.dart';
-import 'package:provider_practice/Restaurant/restaurant_Screen.dart';
+import 'package:provider_practice/Restaurant/view/restaurant_Screen.dart';
 
 class RootTab extends StatefulWidget {
   const RootTab({super.key});

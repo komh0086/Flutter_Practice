@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider_practice/Restaurant/model/restaurant_detail_model.dart';
 
 import '../../Common/const/data.dart';
 import '../model/restaurant_model.dart';
@@ -11,6 +12,8 @@ class RestaurantCard extends StatelessWidget {
   final int deliveryTime;
   final int deliveryFee;
   final double ratings;
+  final bool isDetail;
+  final String? detail;
 
   const RestaurantCard(
       {super.key,
@@ -20,11 +23,13 @@ class RestaurantCard extends StatelessWidget {
       required this.ratingsCount,
       required this.deliveryTime,
       required this.deliveryFee,
-      required this.ratings});
+      required this.ratings,
+      this.isDetail = false,
+      this.detail});
 
-  factory RestaurantCard.fromModel({required RestaurantModel model}){
+  factory RestaurantCard.fromModel({required RestaurantModel model, bool? isDetail}){
     return RestaurantCard(
-      image: Image.network('http://$IP${model.thumbUrl}',
+      image: Image.network('${model.thumbUrl}',
           fit: BoxFit.cover),
       name: model.name,
       tags: model.tags,
@@ -32,6 +37,8 @@ class RestaurantCard extends StatelessWidget {
       deliveryTime: model.deliveryTime,
       deliveryFee: model.deliveryFee,
       ratings: model.ratings,
+      isDetail: isDetail ?? false,
+      detail: model is RestaurantDetailModel ? model.detail : null
     );
   }
 
@@ -40,8 +47,10 @@ class RestaurantCard extends StatelessWidget {
     return Container(
       child: Column(
         children: [
-          ClipRRect(
-            //테두리 깎는 위젯
+          if(isDetail)
+          image,
+          if(!isDetail)
+          ClipRRect(//테두리 깎는 위젯
             borderRadius: BorderRadius.circular(12),
             child: image,
           ),
@@ -53,6 +62,10 @@ class RestaurantCard extends StatelessWidget {
             height: 8,
           ),
           Text('여기엔 아이콘 + 평점, 배달시간 등의 정보'),
+          if(detail != null && isDetail)
+          SizedBox(height: 16,),
+          if(detail != null && isDetail)
+          Text(detail!),
         ],
       ),
     );
