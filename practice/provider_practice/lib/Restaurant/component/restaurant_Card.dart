@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../model/restaurant_detail_Model.dart';
+import '../model/detail/restaurant_detail_model.dart';
 import '../model/restaurant_model.dart';
 
 class RestaurantCard extends StatelessWidget {

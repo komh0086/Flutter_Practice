@@ -1,11 +1,11 @@
+import 'package:actual/Common/view/root_tab.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:provider_practice/Common/const/colors.dart';
-import 'package:provider_practice/Common/const/data.dart';
-import 'package:provider_practice/Common/layout/default_layout.dart';
-import 'package:provider_practice/Common/view/root_tab.dart';
 
 import '../../User/view/login_Screen.dart';
+import '../const/colors.dart';
+import '../const/data.dart';
+import '../layout/default_layout.dart';
 
 class SplashScreen extends StatefulWidget {
   @override

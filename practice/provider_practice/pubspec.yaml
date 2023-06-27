@@ -72,11 +72,11 @@ flutter:
   uses-material-design: true
 
   assets:
-    - asset/img/misc/
-    - asset/img/food/
-    - asset/svg/icon/
-    - asset/img/logo/
-    - asset/rive/
+    - assets/img/misc/
+    - assets/img/food/
+    - assets/svg/icon/
+    - assets/img/logo/
+    - assets/rive/
 
   # To add assets to your application, add an assets section, like this:
   # assets:
@@ -92,17 +92,17 @@ flutter:
   fonts:
     - family: NotoSans
       fonts:
-        - asset: asset/fonts/NotoSansKR-Black.otf
+        - asset: assets/font/NotoSansKR-Black.otf
           weight: 900
-        - asset: asset/fonts/NotoSansKR-Bold.otf
+        - asset: assets/font/NotoSansKR-Bold.otf
           weight: 700
-        - asset: asset/fonts/NotoSansKR-Medium.otf
+        - asset: assets/font/NotoSansKR-Medium.otf
           weight: 500
-        - asset: asset/fonts/NotoSansKR-Regular.otf
+        - asset: assets/font/NotoSansKR-Regular.otf
           weight: 400
-        - asset: asset/fonts/NotoSansKR-Light.otf
+        - asset: assets/font/NotoSansKR-Light.otf
           weight: 300
-        - asset: asset/fonts/NotoSansKR-Thin.otf
+        - asset: assets/font/NotoSansKR-Thin.otf
           weight: 100
 
   # To add custom fonts to your application, add a fonts section here,

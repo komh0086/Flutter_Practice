@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../Restaurant/model/restaurant_detail_Model.dart';
+import '../../Restaurant/model/detail/restaurant_detail_model.dart';
+
 
 class ProductCard extends StatelessWidget{
   final Image image;

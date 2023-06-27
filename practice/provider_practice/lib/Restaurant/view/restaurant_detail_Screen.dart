@@ -1,3 +1,4 @@
+import 'package:actual/Common/dio/dio.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
@@ -5,7 +6,7 @@ import '../../Common/const/data.dart';
 import '../../Common/layout/default_layout.dart';
 import '../../product/component/product_Card.dart';
 import '../component/restaurant_Card.dart';
-import '../model/restaurant_detail_model.dart';
+import '../model/detail/restaurant_detail_model.dart';
 import '../repository/restaurant_repository.dart';
 
 class RestaurantDetailScreen extends StatelessWidget{
@@ -37,9 +38,13 @@ class RestaurantDetailScreen extends StatelessWidget{
   Future<RestaurantDetailModel> getRestaurantDetail() async{
     final dio = Dio();
 
-    final repository = RestaurantRepository(dio, baseUrl: 'http://$IP/restaurant');
+    dio.interceptors.add(
+      CustomInterceptor(storage: storage),
+    );
 
-    return repository.getRestaurantDetail(id: id);
+    final repository = RestaurantRepository(dio, baseUrl: 'http://$IP/restaurant');
+    
+    return repository.getRestaurantDetail(rid: id);
   }
 
   SliverPadding renderProducts({
