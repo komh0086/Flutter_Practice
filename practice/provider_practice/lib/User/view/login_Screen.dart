@@ -1,7 +1,9 @@
 import 'dart:convert';
 
+import 'package:actual/Common/secure_storage/secure_storage.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../Common/component/custom_text_form_field.dart';
 import '../../Common/const/colors.dart';
@@ -9,14 +11,14 @@ import '../../Common/const/data.dart';
 import '../../Common/layout/default_layout.dart';
 import '../../Common/view/root_tab.dart';
 
-class LoginScreen extends StatefulWidget {
+class LoginScreen extends ConsumerStatefulWidget {
   const LoginScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  ConsumerState<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _LoginScreenState extends ConsumerState<LoginScreen> {
   String username = '';
   String password = '';
 
@@ -84,6 +86,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
   void onLoginPressed() async {
     final dio = Dio();
+
+    final storage = ref.read(secureStorageProvider);
 
     String rawString = username + ':' + password;
     Codec<String, String> stirngToBase64 =

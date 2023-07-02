@@ -1,23 +1,21 @@
-import 'package:actual/Common/dio/dio.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../Common/const/data.dart';
 import '../../Common/layout/default_layout.dart';
 import '../../product/component/product_Card.dart';
 import '../component/restaurant_Card.dart';
 import '../model/detail/restaurant_detail_model.dart';
 import '../repository/restaurant_repository.dart';
 
-class RestaurantDetailScreen extends StatelessWidget{
+class RestaurantDetailScreen extends ConsumerWidget{
   final String id;
   const RestaurantDetailScreen({super.key, required this.id});
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return DefaultLayout(
       title: '불타는 떡볶이',
       child: FutureBuilder<RestaurantDetailModel>(
-        future: getRestaurantDetail(),
+        future: ref.watch(restaurantRepositoryProvider).getRestaurantDetail(rid: id),
         builder: (context, AsyncSnapshot<RestaurantDetailModel> snapshot) {
           if(!snapshot.hasData){
             return Center(child: CircularProgressIndicator());
@@ -33,18 +31,6 @@ class RestaurantDetailScreen extends StatelessWidget{
         },
       )
       );
-  }
-
-  Future<RestaurantDetailModel> getRestaurantDetail() async{
-    final dio = Dio();
-
-    dio.interceptors.add(
-      CustomInterceptor(storage: storage),
-    );
-
-    final repository = RestaurantRepository(dio, baseUrl: 'http://$IP/restaurant');
-    
-    return repository.getRestaurantDetail(rid: id);
   }
 
   SliverPadding renderProducts({
